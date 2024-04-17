@@ -54,24 +54,38 @@ const submitSearch = () => {
         <span id="theme-toggler" @click="toggleTheme">{{ isdarkTheme ? 'Light' : 'Dark' }}</span>
       </div>
       <form @submit.prevent="submitSearch">
-        <input type="text" v-model="searchQuery" id="search-input" placeholder="Enter search term" />
+        <input
+          type="text"
+          v-model="searchQuery"
+          id="search-input"
+          placeholder="Enter search term"
+        />
         <button type="submit">Search</button>
       </form>
       <div id="search-result">
         <div v-if="isLoading" class="spinner">Loading...</div>
-        <p v-if="searchResults.length">
-		<div v-for="result in searchResults" :key="result.pageid" class="result-item">
-			<h3 class="result-title">
-				<a :href="`https://en.wikipedia.org/?curid=${result.pageid}`" target="_blank" rel="noopener" >
-				{{ result.title }}
-				</a>
-			</h3>
-			<a :href="`https://en.wikipedia.org/?curid=${result.pageid}`" class="result-link" target="_blank" rel="noopener" >
-				{{ `https://en.wikipedia.org/?curid=${result.pageid}` }}
-				</a>
-				<p class="result-snippet" v-html="result.snippet"></p>
-		</div>
-		</p>
+        <div v-if="searchResults.length">
+          <div v-for="result in searchResults" :key="result.pageid" class="result-item">
+            <h3 class="result-title">
+              <a
+                :href="`https://en.wikipedia.org/?curid=${result.pageid}`"
+                target="_blank"
+                rel="noopener"
+              >
+                {{ result.title }}
+              </a>
+            </h3>
+            <a
+              :href="`https://en.wikipedia.org/?curid=${result.pageid}`"
+              class="result-link"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ `https://en.wikipedia.org/?curid=${result.pageid}` }}
+            </a>
+            <p class="result-snippet" v-html="result.snippet"></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
